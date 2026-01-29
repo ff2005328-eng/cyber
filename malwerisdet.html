@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Critical System Alert | Cybersecurity Simulation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box}
+html,body{
+  margin:0; padding:0;
+  width:100%; height:100%;
+  background:#000;
+  color:#e6e6e6;
+  font-family: "Courier New", monospace;
+  overflow:hidden;
+}
+.overlay{
+  position:fixed; inset:0;
+  background:#000;
+}
+.scanlines{
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.03),
+    rgba(255,255,255,0.03) 1px,
+    rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0) 4px
+  );
+  pointer-events:none;
+  animation:flicker 2.5s infinite;
+}
+@keyframes flicker{
+  0%,100%{opacity:.35}
+  50%{opacity:.2}
+}
+.container{
+  position:relative;
+  padding:20px;
+  max-width:640px;
+  margin:40px auto;
+  border:1px solid #330000;
+  box-shadow:0 0 30px rgba(255,0,0,.15);
+}
+.title{
+  text-align:center;
+  color:#ff2a2a;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+.sub{
+  text-align:center;
+  color:#bdbdbd;
+  font-size:12px;
+  margin-bottom:14px;
+}
+.alert{
+  color:#ffb3b3;
+  border-left:3px solid #ff2a2a;
+  padding-left:10px;
+  margin-bottom:12px;
+}
+.log{
+  height:260px;
+  overflow:auto;
+  border:1px solid #220000;
+  padding:10px;
+  background:#050000;
+  font-size:13px;
+}
+.log .err{color:#ff5c5c}
+.log .ok{color:#7CFF7C}
+.log .warn{color:#ffcc66}
+.glitch{
+  animation:glitch .9s infinite;
+}
+@keyframes glitch{
+  0%{text-shadow:2px 0 red,-2px 0 cyan}
+  20%{text-shadow:-2px 0 red,2px 0 cyan}
+  40%{text-shadow:1px 0 red,-1px 0 cyan}
+  60%{text-shadow:-1px 0 red,1px 0 cyan}
+  80%{text-shadow:3px 0 red,-3px 0 cyan}
+  100%{text-shadow:0 0 transparent}
+}
+.footer{
+  position:fixed; bottom:10px; left:0; right:0;
+  text-align:center; font-size:11px; color:#777;
+}
+.badge{
+  display:inline-block; margin-top:8px;
+  padding:4px 8px; border:1px solid #333;
+  color:#aaa; font-size:11px;
+}
+</style>
+</head>
+<body>
+<div class="overlay" id="fs">
+  <div class="scanlines"></div>
+  <div class="container glitch">
+    <h1 class="title">CRITICAL SYSTEM ALERT</h1>
+    <div class="sub">CYBERSECURITY INCIDENT RESPONSE · SIMULATION</div>
+
+    <div class="alert">
+      Mode latihan profesional aktif. Ini adalah <b>SIMULASI EDUKASI</b> untuk
+      meningkatkan kesadaran keamanan siber. Tidak ada data yang dikumpulkan.
+    </div>
+
+    <div class="log" id="log"></div>
+
+    <div class="badge">ISO/IEC 27001 · Awareness Training</div>
+  </div>
+</div>
+
+<div class="footer">Educational Cybersecurity Simulation · Legal & Safe</div>
+
+<script>
+// Auto fullscreen (user can exit via ESC)
+const fsEl = document.getElementById('fs');
+if (fsEl.requestFullscreen) fsEl.requestFullscreen().catch(()=>{});
+
+// Log simulation
+const logs = [
+  ['warn','[INIT] Memulai prosedur IR-01'],
+  ['ok','[OK] Verifikasi lingkungan sandbox'],
+  ['warn','[SCAN] Analisis vektor ancaman (simulasi)'],
+  ['err','[ALERT] Anomali terdeteksi pada layer aplikasi'],
+  ['ok','[OK] Isolasi proses (simulasi)'],
+  ['warn','[FORENSIC] Pengumpulan artefak dummy'],
+  ['ok','[OK] Tidak ada data nyata diakses'],
+  ['ok','[STATUS] SIMULASI EDUKASI AKTIF'],
+  ['warn','[ADVICE] Terapkan MFA & update berkala'],
+  ['ok','[END] Skenario latihan selesai']
+];
+let i=0;
+const box=document.getElementById('log');
+function add(){
+  if(i<logs.length){
+    const d=document.createElement('div');
+    d.className=logs[i][0];
+    d.textContent='> '+logs[i][1];
+    box.appendChild(d);
+    box.scrollTop=box.scrollHeight;
+    i++;
+  }
+}
+setInterval(add,700);
+
+// Disable common context actions (soft deterrent; still legal)
+document.addEventListener('contextmenu',e=>e.preventDefault());
+</script>
+</body>
+</html>
